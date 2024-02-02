@@ -1,0 +1,4 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "rpc_API_with_grpc_client.Protos";
+

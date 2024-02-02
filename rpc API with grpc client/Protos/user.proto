@@ -1,0 +1,67 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option csharp_namespace = "rpc_API_with_grpc_client.Protos";
+option java_multiple_files = true;
+option java_package = "io.grpc.todos";
+option java_outer_classname = "ToDoProto";
+option objc_class_prefix = "RWTD";
+
+package users;
+
+// The todos service definition.
+service UserService {
+    // Return a list of users.
+    rpc FetchUsers (Empty) returns (UserList) {}
+    // Return specific user by id
+    rpc FetchUserById (UserID) returns (User) {}
+    // Return specific user by phone number
+    rpc FetchUserByPhoneNumber (PhoneNumber) returns (User) {}
+    // Return true or false if password matches
+    rpc CheckIfPasswordIsTheSame (PasswordHash) returns (UserPasswordResult) {}
+
+}
+
+// Message definitions
+message Empty {}
+
+// List of Todos
+message UserList {
+    repeated User users = 1;
+}
+
+message UserID {
+    int64 userID = 1;
+}
+
+message PhoneNumber {
+    string phoneNumber = 1;
+}
+
+message User {
+    optional int64 todoID = 1;
+    string title = 2;
+    bool completed = 3;
+}
+
+message PasswordHash {
+    string passwordHash = 1;
+}
+
+message UserPasswordResult {
+    bool passwordMatches = 1;
+}
+
